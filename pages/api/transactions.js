@@ -1,9 +1,18 @@
-import mongoose from 'mongoose';
+import connectToDB from '@/lib/mongoose';
+import { Customer } from '@/models/customer';
 
-export default function handle(req, res) {
+export default async function handle(req, res) {
   const { method } = req;
-
-  mongoose.connect();
+  await connectToDB();
   if (method === 'POST') {
+    const { customerName, phoneNumber, amountPaid, amountRemaining } = req.body;
+
+    const createCustomer = await Customer.create({
+      customerName,
+      phoneNumber,
+      amountPaid,
+      amountRemaining,
+    });
+    res.json(createCustomer);
   }
 }

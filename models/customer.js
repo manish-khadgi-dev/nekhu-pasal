@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Define a schema for customer data
-
 const customerSchema = new mongoose.Schema(
   {
     customerName: {
@@ -14,11 +13,11 @@ const customerSchema = new mongoose.Schema(
       required: true,
     },
     amountToPay: {
-      type: String,
+      type: Number, // Use Number for storing numeric values
       required: true,
     },
     amountPaid: {
-      type: String,
+      type: Number, // Use Number for storing numeric values
       required: true,
     },
   },
@@ -27,6 +26,7 @@ const customerSchema = new mongoose.Schema(
   }
 );
 
-// create a mongoose model based on schema
+// Create a mongoose model based on schema
+const Customer = mongoose.model('Customer', customerSchema);
 
-export const Customer = model('customer', customerSchema);
+module.exports = Customer; // Use module.exports to export the model
